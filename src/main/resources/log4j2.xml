@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Parameters>
+        <param name="MaxBackupIndex" value="2"/>
+    </Parameters>
+    <Appenders>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <RollingFile name="RollingFile" fileName="logs/MyLog.log" append ="True"
+                     filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500 KB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="ru.sfedu.arai" additivity="false">
+            <AppenderRef level="info" ref="console"/>
+            <AppenderRef level="error" ref="RollingFile"/>
+        </Logger>
+        <Root level="trace">
+        </Root>
+    </Loggers>
+</Configuration>
